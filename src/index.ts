@@ -103,9 +103,9 @@ const registerDay = async (
  *
  * @returns A string with the formatted date
  */
-function formatDate(date: DateTime): string {
+const formatDate = (date: DateTime): string => {
   return date.toFormat("yyyy-MM-dd'T'HH':'mm':'ssZZ");
-}
+};
 
 /**
  * Main function
