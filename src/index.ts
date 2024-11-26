@@ -185,6 +185,7 @@ const main = async () => {
   const accessToken = await login(username, password);
 
   await registerRange(accessToken, start, end);
+  console.log("Registration completed!");
 };
 
 main();
