@@ -95,15 +95,28 @@ const registerRange = async (
   end: DateTime
 ): Promise<void> => {
   for (let day = start; day <= end; day = day.plus({ days: 1 })) {
-    if (day.weekday > 5) {
+    if (day.weekday > 5 || isHoliday(day)) {
       continue;
     }
+
     try {
       await registerDay(accessToken, day);
     } catch (error) {
       console.error(`Error registering day ${day.toISODate()}: ${error}`);
     }
   }
+};
+
+/**
+ * Check if the date is a holiday
+ * @param date Date to check
+ *
+ * @returns True if the date is a holiday, false otherwise
+ */
+const isHoliday = (date: DateTime): boolean => {
+  return config.holidays.some(
+    (holiday) => holiday.month === date.month && holiday.day === date.day
+  );
 };
 
 /**

@@ -11,10 +11,12 @@ export const config: Config = {
       },
     },
   },
+  holidays: [],
 };
 
 type Config = {
   workingHours: Record<string, WorkingHours>;
+  holidays: { month: number; day: number }[];
 };
 
 type WorkingHours = {
