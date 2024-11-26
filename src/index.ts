@@ -95,7 +95,7 @@ const registerRange = async (
   end: DateTime
 ): Promise<void> => {
   for (let day = start; day <= end; day = day.plus({ days: 1 })) {
-    if (day.weekday > 5 || isHoliday(day)) {
+    if (day.weekday > 5 || isHoliday(day) || isVacation(day)) {
       continue;
     }
 
@@ -117,6 +117,29 @@ const isHoliday = (date: DateTime): boolean => {
   return config.holidays.some(
     (holiday) => holiday.month === date.month && holiday.day === date.day
   );
+};
+
+/**
+ * Check if the date is a vacation day
+ * @param date Date to check
+ *
+ * @returns True if the date is a vacation, false otherwise
+ */
+const isVacation = (date: DateTime): boolean => {
+  return config.vacations.some((vacation) => {
+    const startVacation = DateTime.fromObject({
+      month: vacation.start.month,
+      day: vacation.start.day,
+      year: date.year,
+    });
+    const endVacation = DateTime.fromObject({
+      month: vacation.end.month,
+      day: vacation.end.day,
+      year: date.year,
+    });
+
+    return date >= startVacation && date <= endVacation; // Check if the date is within the vacation range
+  });
 };
 
 /**

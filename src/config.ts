@@ -13,25 +13,15 @@ export const config: Config = {
   },
   holidays: [
     { month: 12, day: 6 },
-    { month: 12, day: 19 },
-    { month: 12, day: 20 },
-    { month: 12, day: 21 },
-    { month: 12, day: 22 },
-    { month: 12, day: 23 },
-    { month: 12, day: 24 },
     { month: 12, day: 25 },
-    { month: 12, day: 26 },
-    { month: 12, day: 27 },
-    { month: 12, day: 28 },
-    { month: 12, day: 29 },
-    { month: 12, day: 30 },
-    { month: 12, day: 31 },
   ],
+  vacations: [{ start: { month: 12, day: 19 }, end: { month: 12, day: 31 } }],
 };
 
 type Config = {
   workingHours: Record<string, WorkingHours>;
-  holidays: { month: number; day: number }[];
+  holidays: Day[];
+  vacations: { start: Day; end: Day }[];
 };
 
 type WorkingHours = {
@@ -43,4 +33,9 @@ type WorkingHours = {
     hour: number;
     minute: number;
   };
+};
+
+type Day = {
+  month: number;
+  day: number;
 };

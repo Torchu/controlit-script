@@ -20,6 +20,10 @@ Add your working hours per day in the `workingHours` object. The key is the day 
 
 Add your holidays in the `holidays` array. The date must be in the format `{ month: number, day: number }`.
 
+### Vacations
+
+Add your vacations in the `vacations` array. The date must be in the format `{ start: { month: number, day: number }, end: { month: number, day: number } }`.
+
 ## Running the script
 
 Run the script passing the start and end date as arguments in the format `YYYY-MM-DD`. The end date is also included in the report.
