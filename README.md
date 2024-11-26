@@ -1,5 +1,7 @@
 # controlit-script
 
+ControlIT script to generate a report of the hours worked in a range of days.
+
 ## Installing dependencies
 
 ```bash
@@ -16,8 +18,10 @@ Add your working hours per day in the `workingHours` object. The key is the day 
 
 ## Running the script
 
+Run the script passing the start and end date as arguments in the format `YYYY-MM-DD`. The end date is also included in the report.
+
 ```bash
-bun run start
+bun run start --start=YYYY-MM-DD --end=YYYY-MM-DD
 ```
 
 This project was created using `bun init` in bun v1.1.37. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
