@@ -57,12 +57,14 @@ const main = async () => {
     console.log(
       "No --start argument provided. Using the day following the latest registered event."
     );
-    start = (await getLatestEventDate(accessToken)).plus({ days: 1 });
+    start = (await getLatestEventDate(accessToken))
+      .plus({ days: 1 })
+      .startOf("day");
   }
 
   if (!end) {
     console.log("No --end argument provided. Using today's date.");
-    end = DateTime.now();
+    end = DateTime.now().startOf("day");
   }
 
   console.log(`Registering from ${start.toISODate()} to ${end.toISODate()}...`);
