@@ -71,11 +71,7 @@ const registerDay = async (
   accessToken: string,
   day: DateTime
 ): Promise<void> => {
-  const { start, end } =
-    config.workingHours[day.weekdayLong ?? "default"] ??
-    config.workingHours.default;
-  const startDate = day.set(start);
-  const endDate = day.set(end);
+  const { start, end } = getWorkingHours(day);
 
   const response = await fetch(
     "https://api.controlit.es/api/events/manual-register",
@@ -87,8 +83,8 @@ const registerDay = async (
       },
       body: JSON.stringify({
         EventTypeId: "d8cc9d74-ef29-4267-906b-24fda81e87ec",
-        StartDate: formatDate(startDate),
-        EndDate: formatDate(endDate),
+        StartDate: formatDate(start),
+        EndDate: formatDate(end),
       }),
       redirect: "follow",
     }
@@ -105,6 +101,26 @@ const registerDay = async (
   if (!data.Success) {
     throw new Error(data.Message);
   }
+};
+
+/**
+ * Returns the working hours for a day, adding a random variation to the start and end time
+ *
+ * @param day The day to get the working hours
+ *
+ * @returns An object with the start and end working hours
+ */
+const getWorkingHours = (day: DateTime): { start: DateTime; end: DateTime } => {
+  const { start, end } =
+    config.workingHours[day.weekdayLong ?? "default"] ??
+    config.workingHours.default;
+
+  const variation = Math.random() * 10 - 5; // Random number between -5 and 5
+
+  return {
+    start: day.set(start).plus({ minutes: variation }),
+    end: day.set(end).plus({ minutes: variation }),
+  };
 };
 
 /**
