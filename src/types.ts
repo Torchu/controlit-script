@@ -4,6 +4,15 @@ export type LoginResponse = ApiResponse & {
   };
 };
 
+export type EventHistoryResponse = ApiResponse & {
+  EventHistory: ControlITEvent[];
+};
+
+export type ControlITEvent = {
+  StartDate: string;
+  EndDate: string;
+};
+
 export type ApiResponse = {
   Success: boolean;
   Message: string;

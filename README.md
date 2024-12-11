@@ -32,6 +32,8 @@ Run the script passing the start and end date as arguments in the format `YYYY-M
 bun run start --start=YYYY-MM-DD --end=YYYY-MM-DD
 ```
 
+If not provided, the `start` date will be the following day of the date of the last report and the `end` date will be the current date.
+
 **BE CAREFUL** not to run the script with a range of days that were already included in a previous report.
 
 This project was created using `bun init` in bun v1.1.37. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
