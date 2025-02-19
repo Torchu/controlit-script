@@ -27,9 +27,13 @@ export const config: Config = {
     { month: 12, day: 6 },
     { month: 12, day: 8 },
     { month: 12, day: 25 },
+    { month: 12, day: 31 },
   ],
-  // [{start: {month: MM, day: DD}, end: {month: MM, day: DD}}]
-  vacations: [{ start: { month: 12, day: 19 }, end: { month: 12, day: 31 } }],
+  // [{start: {month: MM, day: DD}, end: {month: MM, day: DD}}] both included
+  vacations: [
+    { start: { month: 3, day: 7 }, end: { month: 3, day: 7 } },
+    { start: { month: 7, day: 16 }, end: { month: 7, day: 18 } },
+  ],
 };
 
 type Config = {
