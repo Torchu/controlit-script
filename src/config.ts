@@ -30,15 +30,25 @@ export const config: Config = {
   ],
   // [{start: {month: MM, day: DD}, end: {month: MM, day: DD}}] both included
   vacations: [
-    { start: { month: 3, day: 7 }, end: { month: 3, day: 7 } },
-    { start: { month: 7, day: 16 }, end: { month: 7, day: 18 } },
+    { start: { month: 1, day: 2 }, end: { month: 1, day: 3 } }, // Christmas Vacations 2024
+    { start: { month: 3, day: 7 }, end: { month: 3, day: 7 } }, // Growth Day
+    { start: { month: 6, day: 25 }, end: { month: 6, day: 27 } }, // WRONG Vacations from 2024
+    { start: { month: 6, day: 27 }, end: { month: 6, day: 27 } }, // Growth Day
+    { start: { month: 7, day: 16 }, end: { month: 8, day: 1 } }, // Summer Vacations I
+    { start: { month: 9, day: 2 }, end: { month: 9, day: 5 } }, // Summer Vacations II
+    { start: { month: 12, day: 5 }, end: { month: 12, day: 5 } }, // Constitution Day
+    { start: { month: 12, day: 22 }, end: { month: 12, day: 31 } }, // Christmas Vacations
+
+    // { start: { month: 7, day: 16 }, end: { month: 7, day: 18 } },
   ],
+  sickLeaves: [{ start: { month: 11, day: 6 }, end: { month: 11, day: 21 } }],
 };
 
 type Config = {
   workingHours: Record<string, WorkingHours>;
   holidays: Day[];
   vacations: { start: Day; end: Day }[];
+  sickLeaves: { start: Day; end: Day }[];
 };
 
 type WorkingHours = {

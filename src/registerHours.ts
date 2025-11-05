@@ -15,7 +15,12 @@ export const registerRange = async (
   end: DateTime
 ): Promise<void> => {
   for (let day = start; day <= end; day = day.plus({ days: 1 })) {
-    if (day.weekday > 5 || isHoliday(day) || isVacation(day)) {
+    if (
+      day.weekday > 5 ||
+      isHoliday(day) ||
+      isVacation(day) ||
+      isSickLeave(day)
+    ) {
       continue;
     }
 
@@ -59,6 +64,29 @@ const isVacation = (date: DateTime): boolean => {
     });
 
     return date >= startVacation && date <= endVacation; // Check if the date is within the vacation range
+  });
+};
+
+/**
+ * Check if the date is a sick leave day
+ * @param date Date to check
+ *
+ * @returns True if the date is a sick leave, false otherwise
+ */
+const isSickLeave = (date: DateTime): boolean => {
+  return config.sickLeaves.some((sickLeave) => {
+    const startSickLeave = DateTime.fromObject({
+      month: sickLeave.start.month,
+      day: sickLeave.start.day,
+      year: date.year,
+    });
+    const endSickLeave = DateTime.fromObject({
+      month: sickLeave.end.month,
+      day: sickLeave.end.day,
+      year: date.year,
+    });
+
+    return date >= startSickLeave && date <= endSickLeave; // Check if the date is within the sick leave range
   });
 };
 
